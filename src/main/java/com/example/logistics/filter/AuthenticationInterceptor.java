@@ -5,7 +5,6 @@ import com.example.logistics.common.Constant;
 import com.example.logistics.common.CsaBizResponseCode;
 import com.example.logistics.domain.bean.UserToken;
 import com.example.logistics.exception.BusinessException;
-import com.example.logistics.service.UserTokenService;
 import com.example.logistics.util.SpringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -33,18 +32,18 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         LoginRequired methodAnnotation = method.getAnnotation(LoginRequired.class);
         //校验是否登录
-        if (methodAnnotation != null) {
-            String token = request.getHeader(Constant.CSA_TOKEN);
-            if (StringUtils.isBlank(token)) {
-                throw new BusinessException(CsaBizResponseCode.NO_LOGIN);
-            }
-            UserTokenService userTokenService = (UserTokenService) SpringUtil.getApplicationContext().getBean("userTokenServiceImpl");
-            UserToken userToken = userTokenService.queryTokenInfo(token);
-            if (Objects.isNull(userToken)) {
-                throw new BusinessException(CsaBizResponseCode.NO_LOGIN);
-            }
-            return true;
-        }
+//        if (methodAnnotation != null) {
+//            String token = request.getHeader(Constant.CSA_TOKEN);
+//            if (StringUtils.isBlank(token)) {
+//                throw new BusinessException(CsaBizResponseCode.NO_LOGIN);
+//            }
+//            UserTokenService userTokenService = (UserTokenService) SpringUtil.getApplicationContext().getBean("userTokenServiceImpl");
+//            UserToken userToken = userTokenService.queryTokenInfo(token);
+//            if (Objects.isNull(userToken)) {
+//                throw new BusinessException(CsaBizResponseCode.NO_LOGIN);
+//            }
+//            return true;
+//        }
         return true;
     }
 }

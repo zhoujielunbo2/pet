@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.logistics.mapper.UserTokenMapper">
+
+    <insert id="addToken" parameterType="com.example.logistics.domain.bean.UserToken">
+           insert into user_token(token,phone,type) VALUES (#{token},#{phone},#{type})
+    </insert>
+
+    <delete id="deleteTokenByPhone">
+        DELETE FROM  user_token WHERE phone=#{phone} and type=#{type}
+    </delete>
+
+    <delete id="deleteByToken">
+        DELETE FROM  user_token WHERE token=#{token}
+
+    </delete>
+    <select id="queryByToken" resultType="com.example.logistics.domain.bean.UserToken">
+        SELECT id FROM user_token WHERE token=#{token}
+    </select>
+</mapper>

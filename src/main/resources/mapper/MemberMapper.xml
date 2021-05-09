@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.logistics.mapper.MemberMapper">
+
+    <insert id="addMember" parameterType="com.example.logistics.domain.bean.Member">
+        INSERT into member(shop_no,shop_name,code,points,phone,name,birthday,state,is_pwd,
+        discount,level,remark,balance,create_date,password,on_credit)
+        VALUES (#{shopNo},#{shopName},#{code},#{points},#{phone},#{name},#{birthday},
+        #{state},#{isPwd},#{discount},#{level},#{remark},#{balance},#{createDate},#{password},#{onCredit})
+    </insert>
+
+    <sql id="selectSql">
+         shop_no AS shopNo,shop_name AS shopName,code,points,phone,name,birthday,state,is_pwd AS isPwd,
+         discount,level,remark,balance,create_date AS createDate,on_credit AS onCredit,password
+    </sql>
+    <select id="queryMemberByPhone" resultType="com.example.logistics.domain.bean.Member">
+        SELECT <include refid="selectSql"/> FROM member  WHERE phone=#{phone}
+    </select>
+    <select id="queryMemberByCodeShopNo" resultType="com.example.logistics.domain.bean.Member">
+        SELECT <include refid="selectSql"/> FROM member  WHERE code=#{code} AND shop_no=#{shopNo}
+    </select>
+    <select id="queryMemberByCondition" resultType="com.example.logistics.domain.bean.Member">
+         SELECT <include refid="selectSql"/> FROM member WHERE CODE like CONCAT('%', #{condition ,jdbcType=VARCHAR}, '%')
+        OR name LIKE CONCAT('%', #{condition ,jdbcType=VARCHAR}, '%')
+        OR phone LIKE CONCAT('%', #{condition ,jdbcType=VARCHAR}, '%')
+    </select>
+
+    <update id="updateBalance">
+        update member set balance=balance+#{amount} WHERE code=#{code} AND shop_no=#{shopNo}
+    </update>
+</mapper>

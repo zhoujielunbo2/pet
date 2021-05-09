@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.logistics.mapper.CityMapper">
+    <select id="queryAllProvinceList" resultType="com.example.logistics.domain.bean.City">
+        SELECT id,pid,city_name AS  cityName,TYPE  FROM city WHERE type=1
+    </select>
+    <select id="queryCityOrAreaByIdList" resultType="com.example.logistics.domain.bean.City">
+
+         SELECT id,pid,city_name AS  cityName,TYPE  FROM city WHERE pid=#{pid}
+    </select>
+
+
+    <select id="queryAllCityList" resultType="com.example.logistics.domain.bean.City">
+        SELECT id,pid,city_name AS  cityName,TYPE  FROM city
+    </select>
+</mapper>

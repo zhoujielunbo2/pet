@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.logistics.mapper.GoodsPriceMapper">
+    <sql id="selectSql">
+        good_code AS goodCode,member_price AS memberPrice,sale_price AS salePrice,base_price AS basePrice
+    </sql>
+    <select id="queryGoodPriceByCode" resultType="com.example.logistics.domain.bean.GoodsPrice">
+        SELECT
+        <include refid="selectSql"/>
+        FROM goods_price WHERE good_code=#{goodCode}
+    </select>
+    <insert id="addGoodsPrice" parameterType="com.example.logistics.domain.bean.GoodsPrice">
+        INSERT  into goods_price(good_code,member_price,sale_price,base_price,create_time)
+        VALUES(#{goodCode},#{memberPrice},#{salePrice},#{basePrice},#{createTime})
+    </insert>
+    <select id="queryGoodPriceByCodeList" parameterType="java.util.List"
+            resultType="com.example.logistics.domain.bean.GoodsPrice">
+        select
+        <include refid="selectSql"/>
+        from goods_price
+        WHERE good_code in
+        <foreach item="item" index="index" collection="codeList" open="(" separator="," close=")">#{item}</foreach>
+    </select>
+</mapper>

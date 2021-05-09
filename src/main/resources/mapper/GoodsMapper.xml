@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.logistics.mapper.GoodsMapper">
+    <insert id="addGoods" parameterType="com.example.logistics.domain.bean.Goods">
+        INSERT into goods(good_code,good_name,good_stock,create_time)
+        VALUES (#{goodCode},#{goodName},#{goodStock},#{createTime})
+    </insert>
+    <select id="queryByGoodCode" resultType="com.example.logistics.domain.bean.Goods">
+        SELECT id,good_name AS goodName FROM goods WHERE good_code=#{goodCode}
+    </select>
+</mapper>

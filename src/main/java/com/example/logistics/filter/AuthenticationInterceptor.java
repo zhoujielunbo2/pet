@@ -1,12 +1,6 @@
 package com.example.logistics.filter;
 
 import com.example.logistics.annotation.LoginRequired;
-import com.example.logistics.common.Constant;
-import com.example.logistics.common.CsaBizResponseCode;
-import com.example.logistics.domain.bean.UserToken;
-import com.example.logistics.exception.BusinessException;
-import com.example.logistics.util.SpringUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,7 +8,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.util.Objects;
 
 /**
  * @author hexiaobo
